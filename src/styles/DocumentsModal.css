@@ -1,0 +1,23 @@
+/*fonts*/
+@font-face {
+    font-family: "Ringbearer";
+    src: url('../assets/fonts/RINGM___.ttf');
+    }
+
+@font-face {
+    font-family: "meta";
+    src: url('../assets/fonts/Metamorphous-Regular.ttf');
+    }
+
+/*overall*/
+.modal {
+    background-color: rgba(22,22,22,0.95);
+}
+.modal h1 {
+    font-family: Ringbearer;
+    font-size: 26pt;
+}
+.modal h2 {
+    font-family: Ringbearer;
+    font-size: 12pt;
+}

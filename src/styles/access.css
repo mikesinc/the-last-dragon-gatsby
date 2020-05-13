@@ -1,0 +1,166 @@
+/*fonts*/
+@font-face {
+    font-family: "Ringbearer";
+    src: url('../assets/fonts/RINGM___.ttf');
+    }
+@font-face {
+    font-family: "meta";
+    src: url('../assets/fonts/Metamorphous-Regular.ttf');
+    }
+
+/*overall*/
+.accessPage {
+    background-image: url('../assets/images/bg4.jpg');
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-position: top;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 1s;
+}
+.particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+/*form*/
+.accessPage h1 {
+    margin-bottom: 30px;
+    font-family: Ringbearer;
+    font-size: 42pt;
+    max-width: fit-content;
+    transition: 1s;
+}
+.accessPage h2 {
+    margin-top: 20px;
+    font-family: Ringbearer;
+    font-size: 12pt;
+    max-width: fit-content;
+    margin-bottom: 0px;
+    transition: 1s;
+}
+.mainBox {
+    background-color: rgba(220, 220, 220, 0.8);
+    box-shadow: 0px 0px 50px 20px;
+    border-style: solid;
+    border-width: 1px;
+    width: 400px;
+    height: fit-content;
+    padding: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    transition: 1s;
+}
+.textFields {
+    width: fit-content;
+    display: flex;
+    height: fit-content;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 20px;
+    max-width: 400px; 
+    transition: 1s;
+}
+#text_field {
+    height: 50px;
+    width: 300px;
+    font-size: 16pt;
+    transition: 1s;
+}
+.submissions {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#submit {
+    height: 50px;
+    width: 100px;
+    font-size: 16pt;
+}   
+#alternateOption {
+    margin-top: 20px;
+    width: 100%;
+}
+@media screen and (max-width: 412px) {
+    .mainBox {
+        width: 90vw;
+    }
+    .textFields {
+        max-width: 80vw;
+    }
+    .accessPage h1 {
+        font-size: 32pt;
+        margin-bottom: 0px;
+    }
+    .accessPage h2 {
+        margin-top: 20px;
+    }
+    #text_field {
+        height: 30px !important;
+        width: 70vw;
+        font-size: 14pt !important;
+        transition: 1s;
+    }
+    #submit {
+        height: 50px;
+        width: 100px;
+        font-size: 14pt;
+    }   
+    #alternateOption {
+        width: 80vw;
+    }
+}
+@media screen and (max-height: 515px) {
+    .mainBox {
+        width: 80vw;
+        overflow: auto;
+    }
+    .textFields {
+        margin-bottom: 10px;
+        max-width: 70vw; 
+        transition: 1s;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .accessPage h1 {
+        margin-bottom: 0px;
+        margin-top: 10px;
+        font-size: 22pt;
+    }
+    .accessPage h2 {
+        padding-top: 5px;
+        font-size: 8pt;
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+    #text_field {
+        height: 30px !important;
+        width: 30vw;
+        font-size: 12pt !important;
+        transition: 1s;
+        margin: 1px;
+    }
+    .submissions {
+        flex-direction: row;
+    }
+    #submit {
+        font-size: 12pt; 
+        width: 100px;
+    }
+    #alternateOption {
+        margin-top: 0px;
+        width: 100px;
+    }
+}

@@ -1,0 +1,38 @@
+.forumBackground {
+    background: black;
+    padding: 0;
+    margin: 0;
+    animation: fadein 0.5s;
+}
+
+.forumHeader {
+    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0,0,0,0)),url('../assets/images/forum.jpg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100vh;
+    filter: blur(2px);
+}
+
+.forumTitle {
+    position: absolute;
+    top: 45%;
+}
+
+.forumTitle h1 {
+    font-family: Ringbearer;
+    color: ghostwhite;
+    text-shadow: 2px 4px rgb(0, 0, 0);
+    font-size: 4vw;
+    text-align: center;
+    cursor: default;
+    -webkit-user-select: none;    
+}
+
+.forumBody {
+    margin-top: 5px;
+    padding-bottom: 50px;
+    background-image: url('../assets/images/party.jpg');
+    background-size: cover;
+    height: 60vh;
+}

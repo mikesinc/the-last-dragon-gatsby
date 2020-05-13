@@ -1,0 +1,39 @@
+/*fonts*/
+@font-face {
+    font-family: "Ringbearer";
+    src: url('../assets/fonts/RINGM___.ttf');
+    }
+@font-face {
+    font-family: "meta";
+    src: url('../assets/fonts/Metamorphous-Regular.ttf');
+    }
+
+/*overall*/
+.confirmedBack {
+    background-image: url('../assets/images/bg4.jpg');
+    height: 100vh;
+    background-position: top;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: Ringbearer;
+    color: black;
+    text-align: center;
+}
+.confirmedBack h1 {
+    font-size: 26pt;
+}
+.goHomeButton {
+    font-size: 12pt;
+    padding-top: 2%;
+}
+@media screen and (max-width: 860px) {
+    .confirmedBack h1 {
+        font-size: 18pt;
+    }
+    .goHomeButton {
+        font-size: 10pt;
+    }
+}

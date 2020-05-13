@@ -1,14 +1,15 @@
-import React from "react"
+import React from 'react';
+import '../styles/404.css';
+import Container from 'react-bootstrap/Container';
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+const NoMatch = () => {
+    return (
+        <Container fluid className='noMatch'>
+            <h1>Error 404! Page Not Found</h1>
+            <h2>This page does not exist</h2>
+            <img src={require('../assets/images/error.png')} alt='lostGoblin' width='20%'></img>
+        </Container>
+    );
+}
 
-const NotFoundPage = () => (
-  <Layout>
-    <SEO title="404: Not found" />
-    <h1>NOT FOUND</h1>
-    <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
-  </Layout>
-)
-
-export default NotFoundPage
+export default NoMatch;

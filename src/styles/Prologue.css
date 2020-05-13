@@ -1,0 +1,59 @@
+/*fonts*/
+@font-face {
+    font-family: "Ringbearer";
+    src: url('../assets/fonts/RINGM___.ttf');
+    }
+
+@font-face {
+    font-family: "meta";
+    src: url('../assets/fonts/Metamorphous-Regular.ttf');
+    }
+
+/*overall*/
+.prologuePage {
+    background-image: url('../assets/images/bg9.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 1s;
+}
+.prologuePage h1 {
+    font-family: Ringbearer;
+    color: ghostwhite;
+    text-shadow: 2px 4px rgb(53, 2, 2);
+    font-size: 52pt;
+    padding-top: 200px;
+    margin-bottom: 100px;
+    max-width: fit-content;
+    transition: 1s;
+}
+.pageText {
+    width: 70vw;
+    font-family: meta;
+    color: ghostwhite;
+    font-size: 12pt;
+    text-align: justify;
+    transition: 1s;
+}
+@media screen and (max-width: 500px) {
+    .pageText {
+        width: 80vw;
+        font-size: 10pt;
+    }
+    .prologuePage h1 {
+        padding-top: 100px;
+        font-size: 24pt;
+        margin-bottom: 20px;
+    }
+}
+@media screen and (max-height: 414px) {
+    .prologuePage h1 {
+        padding-top: 60px;
+        margin-bottom: 30px;
+    }
+}

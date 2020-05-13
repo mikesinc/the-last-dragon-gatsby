@@ -1,0 +1,117 @@
+/*overall*/
+@font-face {
+    font-family: "Ringbearer";
+    src: url('../assets/fonts/RINGM___.ttf');
+    }
+@font-face {
+    font-family: "meta";
+    src: url('../assets/fonts/Metamorphous-Regular.ttf');
+    } 
+.sheetBackground {
+    background-position: center;
+    background-size: cover;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    display: flex;
+    font-family: Ringbearer;
+    color: ghostwhite;
+}
+
+/*body*/
+.characterHeader {
+    position: absolute;
+    margin-top: 150px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+.characterHeader h1 {
+    text-shadow: 2px 4px rgb(0, 0, 0);
+    font-size: 22pt;
+    text-align: center;
+    cursor: default;
+}
+.characterHeader h2 {
+    text-shadow: 2px 4px rgb(0, 0, 0);
+    text-align: center;
+    cursor: default;
+    font-size: 12pt;
+}
+.sheetBackground img {
+    width: 320px;
+}
+.leftTables {
+    text-align: center;
+    font-family: meta;
+    position: relative;
+    padding-top: 150px !important;
+    left: 0px;
+    width: 35%;
+    font-size: 0.8vw;
+    padding: 0;
+    margin: 0;
+}
+.rightTables {
+    text-align: center;
+    font-family: meta;
+    position: relative;
+    padding-top: 150px !important;
+    right: 0px;
+    width: 35%;
+    font-size: 0.8vw;
+    padding: 0;
+    margin-left: 30%;
+}
+.personalityTable li{
+    margin-left: 20px;
+    padding: 3% !important;
+    list-style: outside square none;
+    text-align: left;
+    font-size: 0.8vw;
+}
+thead {
+    font-family: Ringbearer;
+    background-color: cornflowerblue;
+}
+td {
+    width: 10vmax;
+}
+tbody {
+    line-height: 130%;
+}
+@media screen and (max-width: 1050px) {
+    .characterHeader {
+        position: relative;
+        margin-top: 50px;
+    }
+    .sheetBackground {
+        flex-direction: column;
+    }
+    .leftTables, .rightTables {
+        margin: 0;
+        padding: 1vmin;
+        width: 100%;
+        padding-top: 10px !important;
+        font-size: 2vmin;
+    }
+    .sheetBackground img {
+        width: 280px;
+    }
+    .personalityTable li {
+        margin-left: 5px;
+        padding: 3% !important;
+        font-size: 2vmin;
+    }
+}
+@media screen and (max-height: 414px) {
+    .leftTables, .rightTables {
+        font-size: 3vmin;
+    }
+    .personalityTable li {
+        font-size: 3vmin;
+        margin-left: 15px;
+    }
+}

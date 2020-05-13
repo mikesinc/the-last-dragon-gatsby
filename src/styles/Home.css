@@ -1,0 +1,167 @@
+/*animations*/
+@keyframes fadein {
+    from    { opacity: 0; }
+    to      { opacity: 1; }
+}
+
+@keyframes slidein {
+    from    { right: 16%; }
+    to      { right: 15%; }
+}
+
+/*overall*/
+.homePage {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.particles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+/*first page*/
+.homeFirstPage {
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)),url('../assets/images/bg4.jpg');
+    height: 1100px;
+    background-position: top;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+.homeFirstPage h1 {
+    font-family: Ringbearer;
+    color: ghostwhite;
+    font-size: 64pt;
+    padding-top: 200px;
+    margin-left: 15vw;
+    max-width: fit-content;
+    text-shadow: 2px 4px rgb(0, 0, 0);
+}
+.homeFirstPage h2 {
+    font-family: Ringbearer;
+    color: ghostwhite;
+    font-size: 32pt;
+    margin-top: 20px;
+    margin-left: 40vw;
+    max-width: fit-content;
+    text-shadow: 2px 4px rgb(0, 0, 0);
+}
+@media screen and (max-width: 990px) {
+    .homeFirstPage h1 {
+        font-size: 10vmin;
+        margin-left: 5vw;
+    }
+    .homeFirstPage h2 {
+        font-size: 5vmin;
+    }
+}
+@media screen and (max-height: 414px) {
+    .homeFirstPage h1 {
+        font-size: 32pt;
+        padding-top: 100px;
+        margin-left: 20vw;
+    }
+    .homeFirstPage h2 {
+        font-size: 20pt;
+    }
+}
+
+/*Second page*/
+.homeSecondPage {
+    background: linear-gradient(rgba(0,0,0,1), rgba(255, 255, 255, 0)),url('../assets/images/quest.jpg');
+    height: 1100px;
+    background-position: center;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+.blurbText {
+    margin-top: 0px;
+    margin-left: 200px;
+    max-width: 1000px;
+    max-width: 80vw;
+}
+.blurbText h2 {
+    max-width: fit-content;
+    margin-bottom: 80px;
+    font-size: 36pt;
+    font-family: Ringbearer;
+    color: ghostwhite;
+}
+.blurbText p {
+    font-family: meta;
+    color: ghostwhite;
+    font-size: 16pt;
+    margin-bottom: 20px;
+}
+@media screen and (max-width: 1220px) {
+    .blurbText {
+        margin-left: 0px;
+    }
+    .blurbText h2 {
+        font-size: 5vmin;
+        margin-bottom: 40px;
+    }
+    .blurbText p {
+        font-size: 3vmin;
+        margin-bottom: 5px;
+    }
+}
+@media screen and (max-height: 414px) {
+    .blurbText {
+        margin-left: 50px;
+    }
+    .blurbText h2 {
+        font-size: 15pt;
+    }
+    .blurbText p {
+        font-size: 8pt;
+    }
+}
+.introButton {
+    position: absolute;
+    right: 15%;
+    bottom: -75%;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    animation: fadein 1s, slidein 1s;
+    background: rgb(185, 215, 255);
+    box-shadow: 10px 10px 50px 10px;
+}
+.introButton h3 {
+    padding-top: 2%;
+    font-family: Ringbearer;
+    color: ghostwhite;
+    color: black !important;
+    font-size: 3vmin !important;
+    cursor: pointer !important;
+}
+.introButton:hover {
+    border-width: 1px;
+}
+
+/*third page*/
+.homeThirdPage {
+    background-image: linear-gradient(white, rgba(5, 5, 5, 0.5));
+    padding: 5px;
+}
+.socials {
+    display: flex;
+    align-items: center;
+}
+.socials p {
+    font-family: meta;
+    font-size: 12px;
+    padding: 0px 10px 0px !important;
+    margin: 0 !important;
+}
+.roll20 {
+    text-align: right;
+}
+.shortIcon {
+    padding: 5px;
+}

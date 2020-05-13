@@ -1,0 +1,32 @@
+.navbar {
+    font-family: Ringbearer;
+    font-size: 18pt;
+    transition: .5s;
+    padding: 40px;
+}
+
+.bg-darker {
+    background-color: rgba(22,22,22,0.98);
+    padding: 10px;
+    font-size: 14pt;
+}
+
+@media screen and (max-width: 991px) {
+    .toggled {
+        background-color: rgba(22, 22, 22, 0.98);
+        border-radius: 5px;
+        padding: 20px;
+    }
+    .navbar {
+        padding: 5px;
+        font-size: 12pt;
+    }
+    .welcomeUser {
+        visibility: hidden;
+        height: 0;
+    }
+    .bg-darker {
+        background-color: rgba(22,22,22,0);
+        padding: 15px !important;
+    }
+}

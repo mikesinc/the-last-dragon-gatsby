@@ -1,21 +1,22 @@
 import React from "react"
-import { Link } from "gatsby"
+import { Router } from "@reach/router"
+import Chapters from "../components/Chapters"
+import ChapterSummary from "../components/ChapterSummary"
+import Characters from "../components/Characters"
+import CharacterSheet from "../components/CharacterSheet"
+import PrivateRoute from "../components/PrivateRoute"
+import Home from "./home"
+import Forum from "../components/Forum"
 
-import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
-
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
-
-export default IndexPage
+export default () => {
+    return (
+      <Router>
+        <Home path="/" />
+        <PrivateRoute path="/user/chapters" component={Chapters} />
+        <PrivateRoute exact path="/user/chapters/id" component={ChapterSummary} />
+        <PrivateRoute path="/user/forum" component={Forum} />
+        <PrivateRoute path="/user/characters" component={Characters} />
+        <PrivateRoute exact path="/user/characters/id" component={CharacterSheet} />
+      </Router>
+    )
+}

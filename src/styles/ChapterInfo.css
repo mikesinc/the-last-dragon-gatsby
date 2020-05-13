@@ -1,0 +1,70 @@
+/*fonts*/
+@font-face {
+    font-family: "Ringbearer";
+    src: url('../assets/fonts/RINGM___.ttf');
+    }
+
+@font-face {
+    font-family: "meta";
+    src: url('../assets/fonts/Metamorphous-Regular.ttf');
+    }
+
+/*overall*/
+.infoBox {
+    background-color: rgba(22,22,22,0.9);
+    border-radius: 10px;
+    color: ghostwhite;
+    font-family: Ringbearer;
+    width: 40vw;
+}
+.infoBox h1 {
+    font-size: 14pt;
+    text-align: left;
+    padding: 0;
+}
+.infoBox p {
+    font-family: meta;
+    font-size: 10pt;
+    text-align: left;
+    margin-top: 20px;
+}
+@media screen and (max-width: 945px) {
+    .infoBox h1 {
+        font-size: 2.5vmin;
+    }
+    .infoBox h2 {
+        font-size: 3vmin;
+    }
+    .infoBox h5 {
+        font-size: 2vmin;
+    }
+}
+@media screen and (max-width: 810px) {
+    .infoBox {
+        width: 90vw;
+        height: 60vh;
+    }
+    .infoBox h1 {
+        font-size: 14pt;
+    }
+    .infoBox h2 {
+        font-size: 18pt;
+    }
+    .infoBox h5 {
+        font-size: 12pt;
+    }
+}
+@media screen and (max-height: 414px) {
+    .infoBox {
+        width: 90vw;
+    }
+    .infoBox h1 {
+        font-size: 14pt;
+    }
+    .infoBox h2 {
+        font-size: 18pt;
+    }
+    .infoBox h5 {
+        font-size: 12pt;
+    }
+}

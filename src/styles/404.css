@@ -1,0 +1,24 @@
+.noMatch h1 {
+    font-family: Ringbearer;
+    color: ghostwhite;
+    font-size: 4vw;
+    text-align: center;
+}
+
+.noMatch h2 {
+    font-family: Ringbearer;
+    color: ghostwhite;
+    font-size: 2vw;
+    text-align: center;
+}
+
+.noMatch {
+    background-color: black;
+    height: 100vh;
+    padding-top: 20%;
+}
+
+.noMatch img {
+    position: relative;
+    left: 40%;
+}

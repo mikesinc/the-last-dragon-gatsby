@@ -1,0 +1,135 @@
+/*body*/
+.charactersBody {
+    margin-top: 5px;
+    padding-bottom: 50px;
+    background-image: url('../assets/images/party.jpg');
+    background-size: cover;
+    transition: 1s;
+}
+.charactersBody h2 {
+    font-family: Ringbearer;
+    color: ghostwhite;
+    text-shadow: 2px 4px rgb(0, 0, 0);
+    font-size: 36pt;
+    text-align: center;
+    padding-top: 5vw;
+    cursor: default;
+    transition: 1s;
+}
+.graveBody {
+    margin-top: 5px;
+    padding-bottom: 50px;
+    background-image: url('../assets/images/death.jpg');
+    background-size: cover;
+    transition: 1s;
+}
+.graveBody h2 {
+    font-family: Ringbearer;
+    color: ghostwhite;
+    text-shadow: 2px 4px rgb(0, 0, 0);
+    font-size: 36pt;
+    text-align: center;
+    padding-top: 5vw;
+    cursor: default;
+    transition: 1s;
+}
+.characterList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    transition: 1s;
+}
+.character {
+    background-color: rgba(22,22,22,0.9);
+    border-radius: 20px;
+    margin: 5px;
+    padding: 0;
+    width: 40vw;
+    border: black;
+    border-style: solid;
+    border-width: 2px;
+    cursor: pointer;
+}
+.character img{
+    height: 20vw;
+    width: 15vw;
+    object-fit: cover;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    transition: 1s;
+}
+.character:hover {
+    border: cornflowerblue;
+    border-style: solid;
+    border-width: 2px;
+}
+.characterText h5 {
+    font-family: Ringbearer;
+    font-size: 24pt;
+    padding-top: 15px;
+    padding-left: 20px;
+    transition: 1s;
+}
+.characterText h2 {
+    font-family: Ringbearer;
+    text-align: left;
+    font-style: italic;
+    font-size: 12pt;
+    padding-left: 20px;
+    padding-top: 0;
+    cursor: pointer;
+    transition: 1s;
+}
+.characterText p {
+    font-family: meta;
+    font-size: 10pt;
+    text-align: justify;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 30px;
+    transition: 1s;
+}
+@media screen and (max-width: 1430px) {
+    .characterText h5 {
+        font-size: 18pt;
+    }
+    .characterText h2 {
+        font-size: 10pt;
+    }
+    .characterText p {
+        font-size: 7pt;
+        padding-top: 10px;
+    }
+}
+@media screen and (max-width: 1070px) {
+    .character {
+        width: 90vw;
+    }
+    .charactersBody h2 {
+        font-size: 12pt;
+    }
+    .characterText h5 {
+        font-size: 16pt;
+        padding-left: 0px;
+    }
+    .characterText h2 {
+        font-size: 8pt;
+        padding-left: 0px;
+    }
+    .characterText p {
+        font-size: 6pt;
+        padding-top: 10px;
+        padding-left: 0px;
+    }
+    .character img {
+        height: 30vh;
+        width: 30vw;
+    }
+}
+@media screen and (max-height: 414px) {
+    .character img {
+        height: 20vw;
+        object-position: top;
+    }
+}

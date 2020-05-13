@@ -1,0 +1,158 @@
+/*fonts*/
+@font-face {
+    font-family: "Ringbearer";
+    src: url('../assets/fonts/RINGM___.ttf');
+    }
+@font-face {
+    font-family: "meta";
+    src: url('../assets/fonts/Metamorphous-Regular.ttf');
+    }
+
+/*animations*/
+@keyframes fadein {
+    from    { opacity: 0; }
+    to      { opacity: 1; }
+}
+
+/*overall*/
+.chapSummaryBackground {
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+/*text*/
+.chapPart h1 {
+    font-family: Ringbearer;
+    color: ghostwhite;
+    text-shadow: 2px 4px rgb(53, 2, 2);
+    font-size: 52pt;
+    text-align: center;
+    padding-top: 10vw;
+    cursor: default;
+    -webkit-user-select: none;
+    transition: 1s;
+}
+.PartBody {
+    width: 70vw;
+    justify-content: center;
+    border-radius: 15px;
+    font-family: meta;
+    color: ghostwhite;
+    font-size: 12pt;
+    cursor: default;
+    text-align: justify;
+    padding: 1vw;
+    height: auto;
+    white-space: pre-line;
+    -webkit-user-select: none;
+    transition: 1s;
+}
+@media screen and (max-width: 440px) {
+    .chapPart h1 {
+        font-size: 32pt;
+        padding: 60px 0;
+    }
+    .PartBody {
+        font-size: 10pt;
+    }
+}
+
+/*controls*/
+.PartBody h3 {
+    font-family: Ringbearer;
+    font-size: 12pt;
+    padding-top: 10px;
+}
+.prevButton img {
+    padding-left: 0px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.nextButton img {
+    padding-left: 20px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.topButton img {
+    padding-left: 20px;
+    padding-right: 0px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+.nextButton {
+    position: fixed;
+    right: 2%;
+    top: 93%;
+    margin: 0;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    background: rgba(134, 134, 134, 0.911);
+}
+.prevButton {
+    position: fixed;
+    left: 2%;
+    top: 93%;
+    margin: 0;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    background: rgba(134, 134, 134, 0.911);
+}
+.topButton {
+    position: fixed;
+    right: 2%;
+    top: 80%;
+    margin: 0;
+    border-style: solid;
+    border-color: black;
+    border-width: 2px;
+    animation: fadein 2s;
+    background: rgba(134, 134, 134, 0.911);
+}
+@media screen and (max-width: 440px) {
+    .PartBody h3 {
+        display: none;
+    }
+    .nextButton img {
+        padding: 0;
+        width: 20px;
+    }
+    .prevButton img {
+        padding: 0;
+        width: 20px;
+    }
+    .topButton img {
+        padding: 0;
+        width: 20px;
+    }
+}
+@media screen and (max-height: 414px) {
+    .PartBody h3 {
+        display: none;
+    }
+    .nextButton {
+        top: 75%;
+    }
+    .prevButton {    
+        top: 75%;
+    }
+    .topButton {
+        top: 50%; 
+    }
+    .nextButton img {
+        padding: 0;
+        width: 20px;
+    }
+    .prevButton img {
+        padding: 0;
+        width: 20px;
+    }
+    .topButton img {
+        padding: 0;
+        width: 20px;
+    }
+}
