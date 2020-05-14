@@ -14,6 +14,10 @@
     padding: 0 !important;
     margin: 0 !important;
 }
+.homePage p {
+    font-family: meta;
+    font-size: 12px;
+}
 .particles {
     position: fixed;
     width: 100%;
@@ -142,26 +146,4 @@
 }
 .introButton:hover {
     border-width: 1px;
-}
-
-/*third page*/
-.homeThirdPage {
-    background-image: linear-gradient(white, rgba(5, 5, 5, 0.5));
-    padding: 5px;
-}
-.socials {
-    display: flex;
-    align-items: center;
-}
-.socials p {
-    font-family: meta;
-    font-size: 12px;
-    padding: 0px 10px 0px !important;
-    margin: 0 !important;
-}
-.roll20 {
-    text-align: right;
-}
-.shortIcon {
-    padding: 5px;
 }

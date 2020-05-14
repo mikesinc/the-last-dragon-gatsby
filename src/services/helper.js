@@ -3,6 +3,7 @@ const checkAuth = {
 
     authorise: async function () {
         const token = window.localStorage.getItem("access_token");
+        // console.log(!token)
         if (!token) {
             return false;
         }

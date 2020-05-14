@@ -1,16 +1,19 @@
-import React from "react"
-import { navigate } from "gatsby"
-import checkAuth from "../services/helper"
+import React, { useContext } from "react"
+import { navigate, Link } from "gatsby"
+import { AuthContext } from "../context/Store"
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isLoggedIn = checkAuth.authorise()
+const PrivateRoute = async ({ component: Component, ...rest }) => {
+  const [isAuthorised] = useContext(AuthContext)
 
-  if (isLoggedIn) {
-    return <Component {...rest} />
-  } else {
-    navigate("/login")
-    return null
-  }
+  return isAuthorised.isAuthorised ? <Component {...rest} /> : navigate("/login")
+
+//   if (isAuthorised.isAuthorised) {
+//     console.log('ye')
+//     return <Component {...rest} />
+//   } else {
+//     console.log('na')
+//     return navigate("/login")
+//   }
+// }
 }
-
 export default PrivateRoute
