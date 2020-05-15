@@ -81,5 +81,3 @@ export default () => {
     </Container>
   )
 }
-
-// export default Home

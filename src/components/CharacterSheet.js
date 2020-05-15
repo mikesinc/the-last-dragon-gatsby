@@ -8,7 +8,7 @@ const CharacterSheet = () => {
   const [characterData, setCharacterData] = useState({})
   const [isLoaded, setIsLoaded] = useState(false)
 
-  const characterID = window.location.pathname.split("/")[2]
+  const characterID = window.location.pathname.split("/")[3]
 
   useEffect(() => {
     fetchSheet()

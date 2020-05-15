@@ -1,19 +1,15 @@
 import React, { useContext } from "react"
-import { navigate, Link } from "gatsby"
+import { navigate } from "gatsby"
 import { AuthContext } from "../context/Store"
 
-const PrivateRoute = async ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ component: Component, ...rest }) => {
   const [isAuthorised] = useContext(AuthContext)
 
-  return isAuthorised.isAuthorised ? <Component {...rest} /> : navigate("/login")
-
-//   if (isAuthorised.isAuthorised) {
-//     console.log('ye')
-//     return <Component {...rest} />
-//   } else {
-//     console.log('na')
-//     return navigate("/login")
-//   }
-// }
+  if (isAuthorised.isAuthorised === true) {
+    return <Component {...rest} />
+  } else {
+    navigate("/login")
+    return null
+  }
 }
 export default PrivateRoute
