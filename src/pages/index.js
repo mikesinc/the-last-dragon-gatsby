@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button"
 import "../styles/Home.css"
 import Particles from "react-particles-js"
 import { navigate } from "gatsby"
+import { graphql } from "gatsby"
 
 const particleOptions = {
   particles: {
@@ -36,7 +37,7 @@ const particleOptions = {
   },
 }
 
-export default () => {
+export default ({ data }) => {
   const [isBottom, setIsBottom] = useState(false)
 
   useEffect(() => {
@@ -52,21 +53,13 @@ export default () => {
     <Container fluid className="homePage">
       <Particles className="particles" params={particleOptions} />
       <Container fluid className="homeFirstPage">
-        <h1>The Last Dragon</h1>
-        <h2>Australis Awaits...</h2>
+        <h1>{data.contentfulPageHeadings.title}</h1>
+        <h2>{data.contentfulPageHeadings.subtitle}</h2>
       </Container>
       <Container fluid className="homeSecondPage">
         <Container className="blurbText">
-          <h2>A Journey Through Death</h2>
-          <p>A long time ago in a place far far away…</p>
-          <p>
-            There was once a group of adventurers travelling to the town of
-            Loudwater.
-          </p>
-          <p>
-            These adventurers had travelled long and hard, and met on the roads
-            under mysterious circumstances…
-          </p>
+          <h2>{data.contentfulPageHeadings.header}</h2>
+          {data.contentfulPageHeadings.homePageText.content.map((item, i) => <p key={i}>{item.content[0].value}</p> )}
         </Container>
         {isBottom ? (
           <Button
@@ -81,3 +74,20 @@ export default () => {
     </Container>
   )
 }
+
+export const query = graphql`
+  {
+    contentfulPageHeadings {
+      title
+      subtitle
+      header
+      homePageText {
+        content {
+          content {
+            value
+          }
+        }
+      }
+    }
+  }
+`

@@ -2,14 +2,12 @@ import React from 'react';
 import Media from 'react-bootstrap/Media';
 
 const CharacterCard = ({ image, name, race, gameClass, bio }) => {
-    const path = require(`../assets/images/${image}.jpg`);
-
     return (
         <Media as="li" className='character' >
             <img
                 className="mr-3"
-                src={path}
-                alt={image}
+                src={image}
+                alt={name}
             />
             <Media.Body className='characterText'>
                 <h5>{name}</h5>

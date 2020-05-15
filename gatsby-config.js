@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `The Last Dragon`,
@@ -6,13 +10,13 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
-    // {
-    //   resolve: `gatsby-source-contentful`,
-    //   options: {
-    //     spaceId: `rndhkl6kzhsk`,
-    //     accessToken: process.env.GATSBY_CONTENTFUL_DELIVERY_API,
-    //   },
-    // },
+    {
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `8innoycs3ygc`,
+        accessToken: process.env.GATSBY_CONTENTFUL_DELIVERY_API,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
@@ -34,5 +38,6 @@ module.exports = {
         component: require.resolve(`./src/components/Layout.js`),
       },
     },
+    `gatsby-transformer-remark`
   ],
 }

@@ -4,7 +4,6 @@
     padding-bottom: 50px;
     background-image: url('../assets/images/party.jpg');
     background-size: cover;
-    transition: 1s;
 }
 .charactersBody h2 {
     font-family: Ringbearer;
@@ -14,14 +13,12 @@
     text-align: center;
     padding-top: 5vw;
     cursor: default;
-    transition: 1s;
 }
 .graveBody {
     margin-top: 5px;
     padding-bottom: 50px;
     background-image: url('../assets/images/death.jpg');
     background-size: cover;
-    transition: 1s;
 }
 .graveBody h2 {
     font-family: Ringbearer;
@@ -31,14 +28,12 @@
     text-align: center;
     padding-top: 5vw;
     cursor: default;
-    transition: 1s;
 }
 .characterList {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    transition: 1s;
 }
 .character {
     background-color: rgba(22,22,22,0.9);
@@ -57,7 +52,6 @@
     object-fit: cover;
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
-    transition: 1s;
 }
 .character:hover {
     border: cornflowerblue;
@@ -69,7 +63,6 @@
     font-size: 24pt;
     padding-top: 15px;
     padding-left: 20px;
-    transition: 1s;
 }
 .characterText h2 {
     font-family: Ringbearer;
@@ -79,7 +72,6 @@
     padding-left: 20px;
     padding-top: 0;
     cursor: pointer;
-    transition: 1s;
 }
 .characterText p {
     font-family: meta;
@@ -88,7 +80,6 @@
     padding-top: 20px;
     padding-left: 20px;
     padding-right: 30px;
-    transition: 1s;
 }
 @media screen and (max-width: 1430px) {
     .characterText h5 {

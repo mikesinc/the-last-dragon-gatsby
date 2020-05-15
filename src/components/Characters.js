@@ -1,37 +1,80 @@
-import React, { useState, useEffect } from "react"
+import React from "react"
 import Container from "react-bootstrap/Container"
 import "../styles/Characters.css"
 import "../styles/common.css"
 import CharacterCard from "./CharacterCard"
 import { Link } from "gatsby"
-import Loading from "../pages/loading"
+import { useStaticQuery, graphql } from "gatsby"
 
 const Characters = () => {
-  const [characters, setCharacters] = useState([])
-  const [isLoaded, setIsLoaded] = useState(false)
+  const data = useStaticQuery(graphql`
+    {
+      allContentfulCharacters {
+        edges {
+          node {
+            characterCardDetails {
+              characters {
+                alignment
+                attacking {
+                  name
+                  type
+                }
+                attributes {
+                  chari
+                  cons
+                  dex
+                  intel
+                  str
+                  wis
+                }
+                background
+                backdrop
+                bio
+                bonds
+                card
+                classAbility
+                currentHP
+                charClass
+                flaws
+                ideals
+                lvl
+                maxHP
+                name
+                other {
+                  proficiency
+                  type
+                }
+                png
+                personality
+                race
+                stats {
+                  initiative
+                  speed
+                }
+                toolkit {
+                  att
+                  tool
+                }
+                id
+              }
+            }
+          }
+        }
+      }
+    }
+  `)
 
-  useEffect(() => {
-    fetchChars()
-    //eslint-disable-next-line
-  }, [])
-
-  const fetchChars = async () => {
-    const getChars = await require("../CharacterData.json")
-    setCharacters(getChars.characters)
-    setIsLoaded(true)
-  }
-
-  if (isLoaded) {
-    return (
-      <Container fluid className="background">
-        <Container fluid className="header"></Container>
-        <Container fluid className="title">
-          <h1>Characters of Australis</h1>
-        </Container>
-        <Container fluid className="charactersBody">
-          <h2>Player Party</h2>
-          <Container fluid className="characterList">
-            {characters.map(character => {
+  return (
+    <Container fluid className="background">
+      <Container fluid className="header"></Container>
+      <Container fluid className="title">
+        <h1>Characters of Australis</h1>
+      </Container>
+      <Container fluid className="charactersBody">
+        <h2>Player Party</h2>
+        <Container fluid className="characterList">
+          {data.allContentfulCharacters.edges[0].node.characterCardDetails.characters.map(
+            character => {
               if (character.currentHP > 0) {
                 return (
                   <Link
@@ -40,7 +83,7 @@ const Characters = () => {
                     style={{ textDecoration: "none", color: "ghostwhite" }}
                   >
                     <CharacterCard
-                      image={`${character.id}card`}
+                      image={`${character.card}`}
                       name={`${character.name}`}
                       race={`${character.race}`}
                       gameClass={`${character.charClass}`}
@@ -51,13 +94,15 @@ const Characters = () => {
               } else {
                 return null
               }
-            })}
-          </Container>
+            }
+          )}
         </Container>
-        <Container fluid className="graveBody">
-          <h2>Graveyard</h2>
-          <Container fluid className="characterList">
-            {characters.map(character => {
+      </Container>
+      <Container fluid className="graveBody">
+        <h2>Graveyard</h2>
+        <Container fluid className="characterList">
+          {data.allContentfulCharacters.edges[0].node.characterCardDetails.characters.map(
+            character => {
               if (character.currentHP === 0) {
                 return (
                   <Link
@@ -66,7 +111,7 @@ const Characters = () => {
                     style={{ textDecoration: "none", color: "ghostwhite" }}
                   >
                     <CharacterCard
-                      image={`${character.id}card`}
+                      image={`${character.card}`}
                       name={`${character.name}`}
                       race={`${character.race}`}
                       gameClass={`${character.charClass}`}
@@ -77,14 +122,12 @@ const Characters = () => {
               } else {
                 return null
               }
-            })}
-          </Container>
+            }
+          )}
         </Container>
       </Container>
-    )
-  } else {
-    return <Loading />
-  }
+    </Container>
+  )
 }
 
 export default Characters

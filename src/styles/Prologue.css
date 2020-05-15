@@ -20,7 +20,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: 1s;
+}
+.storyPage {
+    background-image: url('../assets/images/bg.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .prologuePage h1 {
     font-family: Ringbearer;
@@ -30,7 +40,15 @@
     padding-top: 200px;
     margin-bottom: 100px;
     max-width: fit-content;
-    transition: 1s;
+}
+.storyPage h1 {
+    font-family: Ringbearer;
+    color: ghostwhite;
+    text-shadow: 2px 4px rgb(53, 2, 2);
+    font-size: 52pt;
+    padding-top: 200px;
+    margin-bottom: 100px;
+    max-width: fit-content;
 }
 .pageText {
     width: 70vw;
@@ -38,7 +56,6 @@
     color: ghostwhite;
     font-size: 12pt;
     text-align: justify;
-    transition: 1s;
 }
 @media screen and (max-width: 500px) {
     .pageText {
