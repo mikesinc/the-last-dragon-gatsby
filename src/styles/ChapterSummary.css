@@ -29,9 +29,20 @@
     font-size: 52pt;
     text-align: center;
     padding-top: 10vw;
-    cursor: default;
-    -webkit-user-select: none;
-    transition: 1s;
+}
+.partHeader {
+    font-family: Ringbearer;
+    font-size: 30px;
+    text-align: left;
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+.partCaption {
+    font-family: Ringbearer;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 50px;
 }
 .PartBody {
     width: 70vw;
@@ -40,13 +51,10 @@
     font-family: meta;
     color: ghostwhite;
     font-size: 12pt;
-    cursor: default;
     text-align: justify;
     padding: 1vw;
     height: auto;
     white-space: pre-line;
-    -webkit-user-select: none;
-    transition: 1s;
 }
 @media screen and (max-width: 440px) {
     .chapPart h1 {

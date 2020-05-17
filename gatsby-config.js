@@ -38,6 +38,7 @@ module.exports = {
         component: require.resolve(`./src/components/Layout.js`),
       },
     },
-    `gatsby-transformer-remark`
+    `gatsby-transformer-remark`,
+    `@contentful/gatsby-transformer-contentful-richtext`,
   ],
 }

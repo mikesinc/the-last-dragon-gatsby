@@ -10,16 +10,20 @@ const Chapters = () => {
 
   const data = useStaticQuery(graphql`
     {
-      allContentfulChapterOverviews {
+      allContentfulChapterOverviews(sort: {fields: id}) {
         edges {
           node {
-            chapterOverviews {
-              chapters {
-                banner
-                chapter
-                brief
-                id
-                title
+            title
+            chapterId
+            chapterNumber
+            brief {
+              childContentfulRichText {
+                html
+              }
+            }
+            chapterImage {
+              fluid {
+                src
               }
             }
           }
@@ -29,7 +33,7 @@ const Chapters = () => {
   `)
 
   const showInfo = value => {
-      setChapter(value)
+    setChapter(value) 
   }
 
   return (
@@ -39,16 +43,18 @@ const Chapters = () => {
         <h1>Campaign Chapters</h1>
       </Container>
       <Container fluid className="body">
-        {data.allContentfulChapterOverviews.edges[0].node.chapterOverviews.chapters.map(
-          item => {
+        {data.allContentfulChapterOverviews.edges.map(
+          (item, i) => {
             return (
               <ChapterCard
-                handleClick={() => showInfo(item.chapter)}
-                chapter={item.chapter}
-                background={item.banner}
+                key={i}
+                handleClick={() => showInfo(item.node.chapterNumber)}
+                chapter={item.node.chapterNumber}
+                background={item.node.chapterImage.fluid.src}
                 selected={chapter}
-                title={item.title}
-                brief={item.brief}
+                title={item.node.title}
+                brief={item.node.brief.childContentfulRichText}
+                chapterId={item.node.chapterId}
               />
             )
           }

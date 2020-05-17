@@ -13,7 +13,7 @@ const User = () => {
     <Layout>
       <Router basepath="/user">
         <PrivateRoute exact path="/chapters" component={Chapters} />
-        <PrivateRoute exact path="/chapterSummary/:id" component={ChapterSummary} />
+        <PrivateRoute exact path="/chapterSummary/:id/:id" component={ChapterSummary} />
         <PrivateRoute path="/forum" component={Forum} />
         <PrivateRoute exact path="/characters" component={Characters} />
         <PrivateRoute exact path="/characterSheet/:id" component={CharacterSheet} />

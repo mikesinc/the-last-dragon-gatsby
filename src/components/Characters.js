@@ -9,53 +9,20 @@ import { useStaticQuery, graphql } from "gatsby"
 const Characters = () => {
   const data = useStaticQuery(graphql`
     {
-      allContentfulCharacters {
+      allContentfulCharacters(sort: {fields: stats___charid}) {
         edges {
           node {
-            characterCardDetails {
-              characters {
-                alignment
-                attacking {
-                  name
-                  type
-                }
-                attributes {
-                  chari
-                  cons
-                  dex
-                  intel
-                  str
-                  wis
-                }
-                background
-                backdrop
-                bio
-                bonds
-                card
-                classAbility
-                currentHP
-                charClass
-                flaws
-                ideals
-                lvl
-                maxHP
-                name
-                other {
-                  proficiency
-                  type
-                }
-                png
-                personality
-                race
-                stats {
-                  initiative
-                  speed
-                }
-                toolkit {
-                  att
-                  tool
-                }
-                id
+            name
+            childContentfulCharactersStatsJsonNode {
+              bio
+              charClass
+              currentHP
+              charid
+              race
+            }
+            cardImage {
+              fluid {
+                src
               }
             }
           }
@@ -73,57 +40,57 @@ const Characters = () => {
       <Container fluid className="charactersBody">
         <h2>Player Party</h2>
         <Container fluid className="characterList">
-          {data.allContentfulCharacters.edges[0].node.characterCardDetails.characters.map(
-            character => {
-              if (character.currentHP > 0) {
-                return (
-                  <Link
-                    key={`${character.id}`}
-                    to={`/user/characterSheet/${character.id}`}
-                    style={{ textDecoration: "none", color: "ghostwhite" }}
-                  >
-                    <CharacterCard
-                      image={`${character.card}`}
-                      name={`${character.name}`}
-                      race={`${character.race}`}
-                      gameClass={`${character.charClass}`}
-                      bio={`${character.bio}`}
-                    />
-                  </Link>
-                )
-              } else {
-                return null
-              }
+          {data.allContentfulCharacters.edges.map(character => {
+            const characterArray =
+              character.node.childContentfulCharactersStatsJsonNode
+            if (characterArray.currentHP > 0) {
+              return (
+                <Link
+                  key={`${characterArray.charid}`}
+                  to={`/user/characterSheet/${characterArray.charid}`}
+                  style={{ textDecoration: "none", color: "ghostwhite" }}
+                >
+                  <CharacterCard
+                    image={`${character.node.cardImage.fluid.src}`}
+                    name={`${character.node.name}`}
+                    race={`${characterArray.race}`}
+                    gameClass={`${characterArray.charClass}`}
+                    bio={`${characterArray.bio}`}
+                  />
+                </Link>
+              )
+            } else {
+              return null
             }
-          )}
+          })}
         </Container>
       </Container>
       <Container fluid className="graveBody">
         <h2>Graveyard</h2>
         <Container fluid className="characterList">
-          {data.allContentfulCharacters.edges[0].node.characterCardDetails.characters.map(
-            character => {
-              if (character.currentHP === 0) {
-                return (
-                  <Link
-                    key={`${character.id}`}
-                    to={`/user/characterSheet/${character.id}`}
-                    style={{ textDecoration: "none", color: "ghostwhite" }}
-                  >
-                    <CharacterCard
-                      image={`${character.card}`}
-                      name={`${character.name}`}
-                      race={`${character.race}`}
-                      gameClass={`${character.charClass}`}
-                      bio={`${character.bio}`}
-                    />
-                  </Link>
-                )
-              } else {
-                return null
-              }
+          {data.allContentfulCharacters.edges.map(character => {
+            const characterArray =
+              character.node.childContentfulCharactersStatsJsonNode
+            if (characterArray.currentHP === 0) {
+              return (
+                <Link
+                  key={`${characterArray.charid}`}
+                  to={`/user/characterSheet/${characterArray.charid}`}
+                  style={{ textDecoration: "none", color: "ghostwhite" }}
+                >
+                  <CharacterCard
+                    image={`${character.node.cardImage.fluid.src}`}
+                    name={`${character.node.name}`}
+                    race={`${characterArray.race}`}
+                    gameClass={`${characterArray.charClass}`}
+                    bio={`${characterArray.bio}`}
+                  />
+                </Link>
+              )
+            } else {
+              return null
             }
-          )}
+          })}
         </Container>
       </Container>
     </Container>

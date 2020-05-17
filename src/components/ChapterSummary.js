@@ -3,139 +3,204 @@ import Container from "react-bootstrap/Container"
 import Button from "react-bootstrap/Button"
 import { Link } from "gatsby"
 import "../styles/chapterSummary.css"
-import Loading from "../pages/loading"
+import { useStaticQuery, graphql } from "gatsby"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS } from "@contentful/rich-text-types"
 
 const ChapterSummary = () => {
-  const [chapter, setChapter] = useState()
-  const [partText, setPartText] = useState([])
-  const [noMatch, setNoMatch] = useState(false)
-  const [chapterEnd, setChapterEnd] = useState(false)
-  const [chapterStart, setChapterStart] = useState(false)
-  const [storyEnd, setStoryEnd] = useState(false)
-  const [storyStart, setStoryStart] = useState(false)
-  const [lastPartRef, setLastPartRef] = useState()
+  const [partNumbers, setPartNumbers] = useState(0)
+  const [prevChapPartNumbers, setPrevChapPartNumbers] = useState(0)
+  const [position, setPosition] = useState("")
   const [isBottom, setIsBottom] = useState(false)
+  const [partText, setPartText] = useState("")
+  const [partBackground, setPartBackground] = useState(0)
 
-  const chapArray = ["One", "Two", "Three", "Four", "Five", "Six"]
-
-  let partNum = []
-  const chapStr = []
-  window.location.pathname.split("y/")[1].split("").forEach(letter => {
-    if (Number(letter) || letter === "0") {
-      partNum.push(Number(letter))
-    } else {
-      chapStr.push(letter)
-    }
-  })
-
-  let part = Number(partNum.join(""))
-  const chapString = chapStr.join("")
-
-  const fetchChapters = async () => {
-    const getChapters = await require("../ChapterText.json")
-    if (!getChapters.chapterSummaries[chapter - 1].Parts[part - 1]) {
-      if (!(chapter + 1)) {
-        setNoMatch(true)
+  const data = useStaticQuery(graphql`
+    {
+      allContentfulChapterOverviews(sort: { fields: chapterId }) {
+        edges {
+          node {
+            title
+            chapterId
+            chapterNumber
+          }
+        }
       }
-    } else {
-      setPartText(
-        getChapters.chapterSummaries[chapter - 1].Parts[part - 1].Text.join(
-          "\n\n"
-        )
-      )
+      allContentfulChapterSummaries(sort: { fields: [chapter, part] }) {
+        edges {
+          node {
+            chapter
+            partBackgroundImage {
+              fluid {
+                src
+              }
+            }
+            part
+            partSummary {
+              json
+            }
+          }
+        }
+      }
     }
+  `)
+
+  const options = {
+    renderNode: {
+      [BLOCKS.EMBEDDED_ASSET]: (node, children) => (
+        <img width="100%" style={{marginTop: '50px'}} src={`https:${node.data.target.fields.file["en-US"].url}`} />
+      ),
+      [BLOCKS.HEADING_1]: (node, children) => (
+        <h2 className="partHeader">{children}</h2>
+      ),
+      [BLOCKS.HEADING_6]: (node, children) => (
+        <h6 className="partCaption">{children}</h6>
+      ),
+    },
+    renderMark: {},
   }
 
+  let chapters = data.allContentfulChapterOverviews.edges.length
+  let chapter = Number(window.location.pathname.split("/")[3])
+  let part = Number(window.location.pathname.split("/")[4])
+
   useEffect(() => {
-    switch (chapString) {
-      case "One":
-        part === 2 ? setChapterEnd(true) : setChapterEnd(false)
-        part === 1 ? setStoryStart(true) : setStoryStart(false)
-        setChapter(1)
-        break
-      case "Two":
-        part === 1 ? setChapterStart(true) : setChapterStart(false)
-        part === 8 ? setChapterEnd(true) : setChapterEnd(false)
-        setLastPartRef(2)
-        setChapter(2)
-        break
-      case "Three":
-        part === 1 ? setChapterStart(true) : setChapterStart(false)
-        part === 6 ? setChapterEnd(true) : setChapterEnd(false)
-        setLastPartRef(8)
-        setChapter(3)
-        break
-      case "Four":
-        part === 1 ? setChapterStart(true) : setChapterStart(false)
-        part === 11 ? setChapterEnd(true) : setChapterEnd(false)
-        setLastPartRef(6)
-        setChapter(4)
-        break
-      case "Five":
-        part === 1 ? setChapterStart(true) : setChapterStart(false)
-        part === 10 ? setChapterEnd(true) : setChapterEnd(false)
-        setLastPartRef(11)
-        setChapter(5)
-        break
-      case "Six":
-        part === 1 ? setChapterStart(true) : setChapterStart(false)
-        if (part === 4) {
-          setStoryEnd(true)
-          setChapterEnd(true)
-        } else {
-          setStoryEnd(false)
-          setChapterEnd(false)
-        }
-        setLastPartRef(10)
-        setChapter(6)
-        break
-      default:
-        return
-    }
-    if (chapter) {
-      fetchChapters()
-    }
     document.addEventListener("scroll", () => {
       const checkBottom = window.scrollY > window.innerHeight - 100
       checkBottom !== isBottom
         ? setIsBottom(checkBottom)
         : setIsBottom(checkBottom)
     })
-    // eslint-disable-next-line
-  }, [chapter, partText, chapterEnd, storyEnd, noMatch, chapString, part])
+  })
 
-  if (!chapter || !part) {
-    return <Loading />
-  } else {
-    return (
-      <Container
-        fluid
-        className="chapSummaryBackground"
-        style={{
-          backgroundImage: `linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)),url(${require(`../assets/images/chap${chapter}back.jpg`)})`,
-        }}
-      >
-        <Container fluid className="chapPart">
-          <h1>
-            Ch. {chapter} | Pt. {part}
-          </h1>
-        </Container>
-        <Container className="PartBody">
-          <p>{partText}</p>
-          {isBottom ? (
+  useEffect(() => {
+    setPrevChapPartNumbers(
+      data.allContentfulChapterSummaries.edges.filter(page => {
+        if (page.node.chapter === chapter - 1) {
+          return page.node
+        }
+        return null
+      }).length
+    )
+
+    setPartBackground(
+      data.allContentfulChapterSummaries.edges.filter(page => {
+        if (page.node.chapter === chapter && page.node.part === part) {
+          return page.node
+        }
+        return null
+      })[0].node.partBackgroundImage.fluid.src
+    )
+
+    setPartNumbers(
+      data.allContentfulChapterSummaries.edges.filter(page => {
+        if (page.node.chapter === chapter) {
+          return page.node
+        }
+        return null
+      }).length
+    )
+
+    setPartText(
+      data.allContentfulChapterSummaries.edges.filter(page => {
+        if (page.node.chapter === chapter && page.node.part === part) {
+          return page.node
+        }
+        return null
+      })[0].node.partSummary.json
+    )
+
+    switch (part % partNumbers) {
+      case 1:
+        setPosition("start")
+        break
+      case 0:
+        setPosition("end")
+        break
+      default:
+        setPosition("between")
+        break
+    }
+  }, [chapter, part, partNumbers, position])
+
+  return (
+    <Container
+      fluid
+      className="chapSummaryBackground"
+      style={{
+        backgroundImage: `linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 1)),url(${partBackground})`,
+      }}
+    >
+      <Container fluid className="chapPart">
+        <h1>
+          Ch. {chapter} | Pt. {part}
+        </h1>
+      </Container>
+      <Container className="PartBody">
+        {/* <div dangerouslySetInnerHTML={{ __html: partText.html }} /> */}
+        {(documentToReactComponents(partText, options))}
+        {isBottom ? (
+          <Button
+            className="topButton"
+            variant="light"
+            onClick={() => window.scrollTo(0, 0)}
+          >
+            <Container style={{ display: "flex" }}>
+              <h3>Top</h3>
+              <img alt="hand" src={require("../assets/images/top.png")}></img>
+            </Container>
+          </Button>
+        ) : null}
+        {chapter === chapters && position === "end" ? (
+          <Link to={`/user/chapterSummary/${chapter}/${part - 1}`}>
             <Button
-              className="topButton"
+              className="prevButton"
               variant="light"
               onClick={() => window.scrollTo(0, 0)}
             >
               <Container style={{ display: "flex" }}>
-                <h3>Top</h3>
-                <img alt="hand" src={require("../assets/images/top.png")}></img>
+                <img
+                  alt="hand"
+                  src={require("../assets/images/prev.png")}
+                ></img>
+                <h3>Previous</h3>
               </Container>
             </Button>
-          ) : null}
-          {storyEnd ? (
-            <Link to={`/user/chapterSummary/${chapString}${part - 1}`}>
+          </Link>
+        ) : chapter === 1 && position === "start" ? (
+          <Link to={`/user/chapterSummary/${chapter}/${part + 1}`}>
+            <Button
+              className="nextButton"
+              variant="light"
+              onClick={() => window.scrollTo(0, 0)}
+            >
+              <Container style={{ display: "flex" }}>
+                <h3>Next</h3>
+                <img
+                  alt="hand"
+                  src={require("../assets/images/next.png")}
+                ></img>
+              </Container>
+            </Button>
+          </Link>
+        ) : position === "end" ? (
+          <>
+            <Link to={`/user/chapterSummary/${chapter + 1}/${1}`}>
+              <Button
+                className="nextButton"
+                variant="light"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                <Container style={{ display: "flex" }}>
+                  <h3>Next Chapter</h3>
+                  <img
+                    alt="hand"
+                    src={require("../assets/images/next.png")}
+                  ></img>
+                </Container>
+              </Button>
+            </Link>
+            <Link to={`/user/chapterSummary/${chapter}/${part - 1}`}>
               <Button
                 className="prevButton"
                 variant="light"
@@ -150,8 +215,10 @@ const ChapterSummary = () => {
                 </Container>
               </Button>
             </Link>
-          ) : storyStart ? (
-            <Link to={`/user/chapterSummary/${chapString}${part + 1}`}>
+          </>
+        ) : position === "start" ? (
+          <>
+            <Link to={`/user/chapterSummary/${chapter}/${part + 1}`}>
               <Button
                 className="nextButton"
                 variant="light"
@@ -166,112 +233,61 @@ const ChapterSummary = () => {
                 </Container>
               </Button>
             </Link>
-          ) : chapterEnd ? (
-            <>
-              <Link to={`/user/chapterSummary/${chapArray[chapter]}${1}`}>
-                <Button
-                  className="nextButton"
-                  variant="light"
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  <Container style={{ display: "flex" }}>
-                    <h3>Next Chapter</h3>
-                    <img
-                      alt="hand"
-                      src={require("../assets/images/next.png")}
-                    ></img>
-                  </Container>
-                </Button>
-              </Link>
-              <Link to={`/user/chapterSummary/${chapString}${part - 1}`}>
-                <Button
-                  className="prevButton"
-                  variant="light"
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  <Container style={{ display: "flex" }}>
-                    <img
-                      alt="hand"
-                      src={require("../assets/images/prev.png")}
-                    ></img>
-                    <h3>Previous</h3>
-                  </Container>
-                </Button>
-              </Link>
-            </>
-          ) : chapterStart ? (
-            <>
-              <Link to={`/user/chapterSummary/${chapString}${part + 1}`}>
-                <Button
-                  className="nextButton"
-                  variant="light"
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  <Container style={{ display: "flex" }}>
-                    <h3>Next</h3>
-                    <img
-                      alt="hand"
-                      src={require("../assets/images/next.png")}
-                    ></img>
-                  </Container>
-                </Button>
-              </Link>
-              <Link
-                to={`/user/chapterSummary/${chapArray[chapter - 2]}${lastPartRef}`}
+            <Link
+              to={`/user/chapterSummary/${chapter - 1}/${prevChapPartNumbers}`}
+            >
+              <Button
+                className="prevButton"
+                variant="light"
+                onClick={() => window.scrollTo(0, 0)}
               >
-                <Button
-                  className="prevButton"
-                  variant="light"
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  <Container style={{ display: "flex" }}>
-                    <img
-                      alt="hand"
-                      src={require("../assets/images/prev.png")}
-                    ></img>
-                    <h3>Previous Chapter</h3>
-                  </Container>
-                </Button>
-              </Link>
-            </>
-          ) : !chapterEnd && !chapterStart ? (
-            <>
-              <Link to={`/user/chapterSummary/${chapString}${part - 1}`}>
-                <Button
-                  className="prevButton"
-                  variant="light"
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  <Container style={{ display: "flex" }}>
-                    <img
-                      alt="hand"
-                      src={require("../assets/images/prev.png")}
-                    ></img>
-                    <h3>Previous</h3>
-                  </Container>
-                </Button>
-              </Link>
-              <Link to={`/user/chapterSummary/${chapString}${part + 1}`}>
-                <Button
-                  className="nextButton"
-                  variant="light"
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  <Container style={{ display: "flex" }}>
-                    <h3>Next</h3>
-                    <img
-                      alt="hand"
-                      src={require("../assets/images/next.png")}
-                    ></img>
-                  </Container>
-                </Button>
-              </Link>
-            </>
-          ) : null}
-        </Container>
+                <Container style={{ display: "flex" }}>
+                  <img
+                    alt="hand"
+                    src={require("../assets/images/prev.png")}
+                  ></img>
+                  <h3>Previous Chapter</h3>
+                </Container>
+              </Button>
+            </Link>
+          </>
+        ) : position === "between" ? (
+          <>
+            <Link to={`/user/chapterSummary/${chapter}/${part - 1}`}>
+              <Button
+                className="prevButton"
+                variant="light"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                <Container style={{ display: "flex" }}>
+                  <img
+                    alt="hand"
+                    src={require("../assets/images/prev.png")}
+                  ></img>
+                  <h3>Previous</h3>
+                </Container>
+              </Button>
+            </Link>
+            <Link to={`/user/chapterSummary/${chapter}/${part + 1}`}>
+              <Button
+                className="nextButton"
+                variant="light"
+                onClick={() => window.scrollTo(0, 0)}
+              >
+                <Container style={{ display: "flex" }}>
+                  <h3>Next</h3>
+                  <img
+                    alt="hand"
+                    src={require("../assets/images/next.png")}
+                  ></img>
+                </Container>
+              </Button>
+            </Link>
+          </>
+        ) : null}
       </Container>
-    )
-  }
+    </Container>
+  )
 }
 
 export default ChapterSummary

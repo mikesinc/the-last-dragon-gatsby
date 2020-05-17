@@ -5,6 +5,7 @@ import "../styles/Home.css"
 import Particles from "react-particles-js"
 import { navigate } from "gatsby"
 import { graphql } from "gatsby"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 
 const particleOptions = {
   particles: {
@@ -53,13 +54,13 @@ export default ({ data }) => {
     <Container fluid className="homePage">
       <Particles className="particles" params={particleOptions} />
       <Container fluid className="homeFirstPage">
-        <h1>{data.contentfulPageHeadings.title}</h1>
-        <h2>{data.contentfulPageHeadings.subtitle}</h2>
+        <h1>{data.allContentfulOverall.edges[0].node.websiteTitle}</h1>
+        <h2>{data.allContentfulOverall.edges[0].node.websiteSubtitle}</h2>
       </Container>
       <Container fluid className="homeSecondPage">
         <Container className="blurbText">
-          <h2>{data.contentfulPageHeadings.header}</h2>
-          {data.contentfulPageHeadings.homePageText.content.map((item, i) => <p key={i}>{item.content[0].value}</p> )}
+          <h2>{data.allContentfulOverall.edges[0].node.teaserHeader}</h2>
+          {documentToReactComponents(data.allContentfulOverall.edges[0].node.teaserSubtext.json)}
         </Container>
         {isBottom ? (
           <Button
@@ -77,14 +78,24 @@ export default ({ data }) => {
 
 export const query = graphql`
   {
-    contentfulPageHeadings {
-      title
-      subtitle
-      header
-      homePageText {
-        content {
-          content {
-            value
+    allContentfulOverall {
+      edges {
+        node {
+          homepageBackground2 {
+            fluid {
+              src
+            }
+          }
+          background {
+            fluid {
+              src
+            }
+          }
+          websiteSubtitle
+          websiteTitle
+          teaserHeader
+          teaserSubtext {
+            json
           }
         }
       }

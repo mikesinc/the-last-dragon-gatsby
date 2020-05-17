@@ -7,52 +7,58 @@ import { useStaticQuery, graphql } from "gatsby"
 const CharacterSheet = () => {
   const data = useStaticQuery(graphql`
     {
-      allContentfulCharacters {
+      allContentfulCharacters(sort: {fields: stats___charid}) {
         edges {
           node {
-            characterCardDetails {
-              characters {
-                alignment
-                attacking {
-                  name
-                  type
-                }
-                attributes {
-                  chari
-                  cons
-                  dex
-                  intel
-                  str
-                  wis
-                }
-                background
-                backdrop
-                bio
-                bonds
-                classAbility
-                currentHP
-                charClass
-                flaws
-                ideals
-                lvl
-                maxHP
+            name
+            childContentfulCharactersStatsJsonNode {
+              alignment
+              attacking {
                 name
-                other {
-                  proficiency
-                  type
-                }
-                personality
-                png
-                race
-                stats {
-                  initiative
-                  speed
-                }
-                toolkit {
-                  att
-                  tool
-                }
-                id
+                type
+              }
+              attributes {
+                chari
+                cons
+                dex
+                intel
+                str
+                wis
+              }
+              bio
+              background
+              bonds
+              charClass
+              classAbility
+              currentHP
+              flaws
+              ideals
+              lvl
+              maxHP
+              other {
+                proficiency
+                type
+              }
+              personality
+              race
+              stats {
+                initiative
+                speed
+              }
+              toolkit {
+                att
+                tool
+              }
+              charid
+            }
+            characterSheetImage {
+              fluid {
+                src
+              }
+            }
+            characterSheetBackground {
+              file {
+                url
               }
             }
           }
@@ -64,7 +70,6 @@ const CharacterSheet = () => {
   const characterID = window.location.pathname.split("/")[3]
 
   const {
-    name,
     race,
     charClass,
     lvl,
@@ -82,9 +87,9 @@ const CharacterSheet = () => {
     toolkit,
     other,
     classAbility,
-  } = data.allContentfulCharacters.edges[0].node.characterCardDetails.characters[characterID]
-  const backgroundImg = data.allContentfulCharacters.edges[0].node.characterCardDetails.characters[characterID].backdrop
-  const portrait = data.allContentfulCharacters.edges[0].node.characterCardDetails.characters[characterID].png
+  } = data.allContentfulCharacters.edges[characterID].node.childContentfulCharactersStatsJsonNode
+  const backgroundImg = data.allContentfulCharacters.edges[characterID].node.characterSheetBackground.file.url
+  const portrait = data.allContentfulCharacters.edges[characterID].node.characterSheetImage.fluid.src
 
   return (
     <Container
@@ -95,7 +100,7 @@ const CharacterSheet = () => {
       }}
     >
       <Container fluid className="characterHeader">
-        <h1>{name}</h1>
+        <h1>{data.allContentfulCharacters.edges[characterID].node.name}</h1>
         <h2>
           {race} | {charClass} | Level {lvl}{" "}
         </h2>
