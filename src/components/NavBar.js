@@ -17,7 +17,7 @@ const NavBar = () => {
       allContentfulOverall {
         edges {
           node {
-            WebsiteTitle
+            websiteTitle
           }
         }
       }
@@ -48,7 +48,7 @@ const NavBar = () => {
             style={{ paddingRight: "40px" }}
             onClick={() => navigate("/")}
           >
-            {data.allContentfulOverall.edges[0].node.WebsiteTitle}
+            {data.allContentfulOverall.edges[0].node.websiteTitle}
           </Nav.Link>
           <NavDropdown
             style={{ paddingRight: "30px" }}
