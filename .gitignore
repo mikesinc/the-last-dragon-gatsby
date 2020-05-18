@@ -70,5 +70,4 @@ yarn-error.log
 
 
 #extras
-*.json
 src/assets
