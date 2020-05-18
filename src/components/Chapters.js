@@ -10,6 +10,17 @@ const Chapters = () => {
 
   const data = useStaticQuery(graphql`
     {
+      allContentfulOverall {
+        edges {
+          node {
+            background {
+              file {
+                url
+              }
+            }
+          }
+        }
+      }
       allContentfulChapterOverviews(sort: {fields: id}) {
         edges {
           node {
@@ -38,7 +49,7 @@ const Chapters = () => {
 
   return (
     <Container fluid className="background">
-      <Container fluid className="header"></Container>
+      <Container fluid className="header" style={{backgroundImage: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.background.file.url})`}}></Container>
       <Container fluid className="title">
         <h1>Campaign Chapters</h1>
       </Container>

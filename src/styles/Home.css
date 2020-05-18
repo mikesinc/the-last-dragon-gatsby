@@ -28,12 +28,11 @@
 
 /*first page*/
 .homeFirstPage {
-    background: linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)),url('../assets/images/bg4.jpg');
     height: 1100px;
-    background-position: top;
-    background-size: cover;
     margin: 0;
     padding: 0;
+    background-position: top !important;
+    background-size: cover !important;
 }
 .homeFirstPage h1 {
     font-family: Ringbearer;
@@ -75,10 +74,9 @@
 
 /*Second page*/
 .homeSecondPage {
-    background: linear-gradient(rgba(0,0,0,1), rgba(255, 255, 255, 0)),url('../assets/images/quest.jpg');
     height: 1100px;
-    background-position: center;
-    background-size: cover;
+    background-position: center !important;
+    background-size: cover !important;
     margin: 0;
     padding: 0;
 }

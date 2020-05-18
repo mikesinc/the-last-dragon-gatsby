@@ -78,6 +78,7 @@ const Register = () => {
         axios({
           method: "post",
           url: "https://limitless-beach-12582.herokuapp.com/api/user/register",
+          // url: "http://localhost:3001/api/user/register",
           data: {
             email: signInEmail,
             password: signInPassword,
@@ -86,7 +87,8 @@ const Register = () => {
         })
           .then(res => {
             if (res.status === 200) {
-              window.localStorage.setItem("access_token", `Bearer ${res.data}`)
+              window.localStorage.setItem("access_token", `Bearer ${res.data.accessToken}`)
+              window.localStorage.setItem("refresh_token", `${res.data.refreshToken}`)
               window.localStorage.setItem("user_email", signInEmail)
               if (authorise()) {
                 navigate("/confirmation")

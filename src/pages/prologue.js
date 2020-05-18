@@ -24,6 +24,7 @@ const Prologue = () => {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node, children) => (
         <img
+          alt={node.data.target.fields.title["en-US"]}
           width="100%"
           style={{ marginTop: "50px" }}
           src={`https:${node.data.target.fields.file["en-US"].url}`}

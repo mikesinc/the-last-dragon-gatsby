@@ -22,8 +22,7 @@ const Layout = ({ children }) => {
       }
     }
     authorise()
-    // eslint-disable-next-line
-  }, [])
+  }, [setIsAuthorised])
 
   if (isChecking) {
     return <Loading />

@@ -6,9 +6,8 @@
 }
 
 .forumHeader {
-    background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0,0,0,0)),url('../assets/images/forum.jpg');
-    background-position: center;
-    background-size: cover;
+    background-position: center !important;
+    background-size: cover !important;
     background-attachment: fixed;
     height: 100vh;
     filter: blur(2px);
@@ -27,12 +26,4 @@
     text-align: center;
     cursor: default;
     -webkit-user-select: none;    
-}
-
-.forumBody {
-    margin-top: 5px;
-    padding-bottom: 50px;
-    background-image: url('../assets/images/party.jpg');
-    background-size: cover;
-    height: 60vh;
 }

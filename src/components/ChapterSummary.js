@@ -31,8 +31,8 @@ const ChapterSummary = () => {
           node {
             chapter
             partBackgroundImage {
-              fluid {
-                src
+              file {
+                url
               }
             }
             part
@@ -48,7 +48,7 @@ const ChapterSummary = () => {
   const options = {
     renderNode: {
       [BLOCKS.EMBEDDED_ASSET]: (node, children) => (
-        <img width="100%" style={{marginTop: '50px'}} src={`https:${node.data.target.fields.file["en-US"].url}`} />
+        <img alt={node.data.target.fields.title["en-US"]} width="100%" style={{marginTop: '50px'}} src={`https:${node.data.target.fields.file["en-US"].url}`} />
       ),
       [BLOCKS.HEADING_1]: (node, children) => (
         <h2 className="partHeader">{children}</h2>
@@ -89,7 +89,7 @@ const ChapterSummary = () => {
           return page.node
         }
         return null
-      })[0].node.partBackgroundImage.fluid.src
+      })[0].node.partBackgroundImage.file.url
     )
 
     setPartNumbers(
@@ -121,6 +121,7 @@ const ChapterSummary = () => {
         setPosition("between")
         break
     }
+    //eslint-disable-next-line
   }, [chapter, part, partNumbers, position])
 
   return (

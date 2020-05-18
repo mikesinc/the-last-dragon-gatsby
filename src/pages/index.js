@@ -53,11 +53,11 @@ export default ({ data }) => {
   return (
     <Container fluid className="homePage">
       <Particles className="particles" params={particleOptions} />
-      <Container fluid className="homeFirstPage">
+      <Container fluid className="homeFirstPage" style={{background: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.background.file.url})`}}>
         <h1>{data.allContentfulOverall.edges[0].node.websiteTitle}</h1>
         <h2>{data.allContentfulOverall.edges[0].node.websiteSubtitle}</h2>
       </Container>
-      <Container fluid className="homeSecondPage">
+      <Container fluid className="homeSecondPage" style={{background: `linear-gradient(rgba(0,0,0,1), rgba(255, 255, 255, 0)),url(${data.allContentfulOverall.edges[0].node.homepageBackground2.file.url})`}}>
         <Container className="blurbText">
           <h2>{data.allContentfulOverall.edges[0].node.teaserHeader}</h2>
           {documentToReactComponents(data.allContentfulOverall.edges[0].node.teaserSubtext.json)}
@@ -82,13 +82,13 @@ export const query = graphql`
       edges {
         node {
           homepageBackground2 {
-            fluid {
-              src
+            file {
+              url
             }
           }
           background {
-            fluid {
-              src
+            file {
+              url
             }
           }
           websiteSubtitle
