@@ -75,7 +75,7 @@ const NavBar = () => {
         </Nav>
         {authInfo.isAuthorised ? (
           <Nav>
-            {authInfo.user === "Conquer" ? (
+            {authInfo.user === "Conquer" || authInfo.user === "Req" ? (
               <h1
                 className="welcomeUser"
                 style={{

@@ -7,6 +7,7 @@ import { AuthContext } from "../context/Store"
 import checkAuth from "../services/helper"
 import { Link, navigate } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
+import Loading from './loading'
 
 const particleOptions = {
   particles: {
@@ -45,6 +46,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("")
   const [signInUsername, setSignInUsername] = useState("")
   const [, setIsAuthorised] = useContext(AuthContext)
+  const [isLoading, setIsLoading] = useState(false)
 
   const data = useStaticQuery(graphql`
     {
@@ -60,7 +62,7 @@ const Register = () => {
         }
       }
     }
-    `)
+  `)
 
   const authorise = async () => {
     const valid = await checkAuth.authorise()
@@ -89,7 +91,9 @@ const Register = () => {
 
   const onSubmitSignIn = e => {
     if (e.which === 13 || !e.which) {
+      setIsLoading(true)
       if (confirmPassword !== signInPassword) {
+        setIsLoading(false)
         return alert("Passwords do not match! Please try again.")
       } else {
         axios({
@@ -104,111 +108,132 @@ const Register = () => {
         })
           .then(res => {
             if (res.status === 200) {
-              window.localStorage.setItem("access_token", `Bearer ${res.data.accessToken}`)
-              window.localStorage.setItem("refresh_token", `${res.data.refreshToken}`)
+              window.localStorage.setItem(
+                "access_token",
+                `Bearer ${res.data.accessToken}`
+              )
+              window.localStorage.setItem(
+                "refresh_token",
+                `${res.data.refreshToken}`
+              )
               window.localStorage.setItem("user_email", signInEmail)
               if (authorise()) {
                 navigate("/confirmation")
               }
             }
+            setIsLoading(false)
           })
-          .catch(err => alert(err.response.data))
+          .catch(err => {
+            alert(err.response.data)
+            setIsLoading(false)
+          })
+          
       }
     }
   }
 
-  return (
-    <Container fluid className="accessPage" style={{background: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.background.file.url})`}}>
-      <Particles className="particles" params={particleOptions} />
+  if (!isLoading) {
+    return (
       <Container
-        className="mainBox"
-        onKeyPress={event => onSubmitSignIn(event)}
+        fluid
+        className="accessPage"
+        style={{
+          background: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.background.file.url})`,
+        }}
       >
-        <h1>Register!</h1>
-        <fieldset className="textFields">
-          <div>
-            <h2>Email</h2>
+        <Particles className="particles" params={particleOptions} />
+        <Container
+          className="mainBox"
+          onKeyPress={event => onSubmitSignIn(event)}
+        >
+          <h1>Register!</h1>
+          <fieldset className="textFields">
+            <div>
+              <h2>Email</h2>
+              <input
+                style={{
+                  fontFamily: "Ringbearer",
+                  height: "40px",
+                  fontSize: "16pt",
+                }}
+                onChange={event => onEmailChange(event)}
+                type="email"
+                placeholder="email@domain.com"
+                name="email-address"
+                id="text_field"
+              />
+            </div>
+            <div>
+              <h2>Username</h2>
+              <input
+                style={{
+                  fontFamily: "Ringbearer",
+                  height: "40px",
+                  fontSize: "16pt",
+                }}
+                onChange={event => onUsernameChange(event)}
+                name="username"
+                id="text_field"
+              />
+            </div>
+            <div>
+              <h2>Password</h2>
+              <input
+                style={{
+                  fontFamily: "Ringbearer",
+                  height: "40px",
+                  fontSize: "16pt",
+                }}
+                onChange={event => onPasswordChange(event)}
+                type="password"
+                name="password"
+                id="text_field"
+              />
+            </div>
+            <div>
+              <h2>Confirm Password</h2>
+              <input
+                style={{
+                  fontFamily: "Ringbearer",
+                  height: "40px",
+                  fontSize: "16pt",
+                }}
+                onChange={event => onConfirmPassword(event)}
+                type="password"
+                id="text_field"
+                name="passwordCheck"
+              />
+            </div>
+          </fieldset>
+          <fieldset className="submissions">
             <input
-              style={{
-                fontFamily: "Ringbearer",
-                height: "40px",
-                fontSize: "16pt",
-              }}
-              onChange={event => onEmailChange(event)}
-              type="email"
-              placeholder="email@domain.com"
-              name="email-address"
-              id="text_field"
-            />
-          </div>
-          <div>
-            <h2>Username</h2>
-            <input
-              style={{
-                fontFamily: "Ringbearer",
-                height: "40px",
-                fontSize: "16pt",
-              }}
-              onChange={event => onUsernameChange(event)}
-              name="username"
-              id="text_field"
-            />
-          </div>
-          <div>
-            <h2>Password</h2>
-            <input
-              style={{
-                fontFamily: "Ringbearer",
-                height: "40px",
-                fontSize: "16pt",
-              }}
-              onChange={event => onPasswordChange(event)}
-              type="password"
-              name="password"
-              id="text_field"
-            />
-          </div>
-          <div>
-            <h2>Confirm Password</h2>
-            <input
-              style={{
-                fontFamily: "Ringbearer",
-                height: "40px",
-                fontSize: "16pt",
-              }}
-              onChange={event => onConfirmPassword(event)}
-              type="password"
-              id="text_field"
-              name="passwordCheck"
-            />
-          </div>
-        </fieldset>
-        <fieldset className="submissions">
-          <input
-            style={{ fontFamily: "Ringbearer" }}
-            type="submit"
-            id="submit"
-            value="Sign in"
-            onClick={event => onSubmitSignIn(event)}
-          />
-          <Link
-            to="/login"
-            style={{ textDecoration: "none", paddingTop: "10px" }}
-          >
-            <input
-              style={{
-                fontFamily: "Ringbearer",
-                background: "none",
-                border: "none",
-              }}
+              style={{ fontFamily: "Ringbearer" }}
               type="submit"
-              value={`Already have an account?\nLog in here`}
+              id="submit"
+              value="Sign in"
+              onClick={event => onSubmitSignIn(event)}
             />
-          </Link>
-        </fieldset>
+            <Link
+              to="/login"
+              style={{ textDecoration: "none", paddingTop: "10px" }}
+            >
+              <input
+                style={{
+                  fontFamily: "Ringbearer",
+                  background: "none",
+                  border: "none",
+                }}
+                type="submit"
+                value={`Already have an account?\nLog in here`}
+              />
+            </Link>
+          </fieldset>
+        </Container>
       </Container>
-    </Container>
-  )
+    )
+  } else {
+    return <Loading />
+  }
 }
 
 export default Register
