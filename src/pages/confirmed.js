@@ -3,8 +3,25 @@ import Container from "react-bootstrap/Container"
 import { Link } from "gatsby"
 import "../styles/Confirmed.css"
 import axios from "axios"
+import { useStaticQuery, graphql } from "gatsby"
 
 const Confirmed = () => {
+  const data = useStaticQuery(graphql`
+    {
+      allContentfulOverall {
+        edges {
+          node {
+            background {
+              file {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+    `)
+
   useEffect(() => {
     axios({
       method: "get",
@@ -20,7 +37,7 @@ const Confirmed = () => {
   }, [])
 
   return (
-    <Container fluid className="confirmedBack">
+    <Container fluid className="confirmedBack" style={{background: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.background.file.url})`}}>
       <h1>Your email is now verified, enjoy!</h1>
       <div className="goHomeButton">
         <Link to="/login" style={{ textDecoration: "none" }}>

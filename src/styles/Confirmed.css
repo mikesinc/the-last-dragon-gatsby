@@ -10,10 +10,9 @@
 
 /*overall*/
 .confirmedBack {
-    background-image: url('../assets/images/bg4.jpg');
     height: 100vh;
-    background-position: top;
-    background-size: cover;
+    background-position: top !important;
+    background-size: cover !important;
     display: flex;
     flex-direction: column;
     justify-content: center;

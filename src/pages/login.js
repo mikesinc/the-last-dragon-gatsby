@@ -6,6 +6,7 @@ import axios from "axios"
 import { AuthContext } from "../context/Store"
 import checkAuth from "../services/helper"
 import { navigate, Link } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 
 const particleOptions = {
   particles: {
@@ -43,6 +44,22 @@ const Login = ({ location }) => {
   const [signInPassword, setSignInPassword] = useState("")
   const [redirect, setRedirect] = useState("/")
   const [, setAuthInfo] = useContext(AuthContext)
+
+  const data = useStaticQuery(graphql`
+    {
+      allContentfulOverall {
+        edges {
+          node {
+            background {
+              file {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+    `)
 
   useEffect(() => {
     const from = location.state.referrer
@@ -119,7 +136,7 @@ const Login = ({ location }) => {
   }
 
   return (
-    <Container fluid className="accessPage">
+    <Container fluid className="accessPage" style={{background: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.background.file.url})`}}>
       <Particles className="particles" params={particleOptions} />
       <Container
         fluid

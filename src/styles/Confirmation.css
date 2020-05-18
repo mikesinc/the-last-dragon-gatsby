@@ -10,11 +10,10 @@
 
 /*overall*/
 .confirmationBack {
-    background-image: url('../assets/images/bg4.jpg');
     min-height: fit-content;
     height: 100vh;
-    background-position: top;
-    background-size: cover;
+    background-position: top !important;
+    background-size: cover !important;
     font-family: Ringbearer;
     display: flex;
     flex-direction: column;

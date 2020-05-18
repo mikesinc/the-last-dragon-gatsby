@@ -2,9 +2,26 @@ import React, { useEffect, useState } from "react"
 import Container from "react-bootstrap/Container"
 import axios from "axios"
 import "../styles/Confirmation.css"
+import { useStaticQuery, graphql } from "gatsby"
 
 const Confirmation = () => {
   const [clicked, setClicked] = useState(false)
+
+  const data = useStaticQuery(graphql`
+    {
+      allContentfulOverall {
+        edges {
+          node {
+            background {
+              file {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+    `)
 
   useEffect(() => {
     sendVerificationEmail()
@@ -30,7 +47,7 @@ const Confirmation = () => {
   }
 
   return (
-    <Container fluid className="confirmationBack">
+    <Container fluid className="confirmationBack" style={{background: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.background.file.url})`}}>
       <h1>Please check your email to verify your account!</h1>
       <h2>
         You must verify your email exists before continuing to use this website.

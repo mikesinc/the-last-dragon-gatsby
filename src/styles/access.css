@@ -10,12 +10,11 @@
 
 /*overall*/
 .accessPage {
-    background-image: url('../assets/images/bg4.jpg');
     height: 100vh;
     margin: 0;
     padding: 0;
-    background-position: top;
-    background-size: cover;
+    background-position: top !important;
+    background-size: cover !important;
     display: flex;
     align-items: center;
     justify-content: center;
