@@ -6,10 +6,23 @@ import "../styles/NavBar.css"
 import { AuthContext } from "../context/Store"
 import { navigate } from "gatsby"
 import axios from "axios"
+import { useStaticQuery, graphql } from "gatsby"
 
 const NavBar = () => {
   const [isTop, setIsTop] = useState(true)
   const [authInfo] = useContext(AuthContext)
+
+  const data = useStaticQuery(graphql`
+    {
+      allContentfulOverall {
+        edges {
+          node {
+            WebsiteTitle
+          }
+        }
+      }
+    }
+  `)
 
   useEffect(() => {
     document.addEventListener("scroll", () => {
@@ -35,7 +48,7 @@ const NavBar = () => {
             style={{ paddingRight: "40px" }}
             onClick={() => navigate("/")}
           >
-            The Last Drago
+            {data.allContentfulOverall.edges[0].node.WebsiteTitle}
           </Nav.Link>
           <NavDropdown
             style={{ paddingRight: "30px" }}
