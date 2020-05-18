@@ -35,7 +35,7 @@ const NavBar = () => {
             style={{ paddingRight: "40px" }}
             onClick={() => navigate("/")}
           >
-            The Last Dragon
+            The Last Drago
           </Nav.Link>
           <NavDropdown
             style={{ paddingRight: "30px" }}
