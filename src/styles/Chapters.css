@@ -3,8 +3,7 @@
     position: relative;
     padding: 0;
     margin-top: 1px;
-    background-image: url('../assets/images/leather.jpg');
-    background-blend-mode: soft-light;
+    background-blend-mode: darken;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

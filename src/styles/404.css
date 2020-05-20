@@ -15,10 +15,8 @@
 .noMatch {
     background-color: black;
     height: 100vh;
-    padding-top: 20%;
-}
-
-.noMatch img {
-    position: relative;
-    left: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }

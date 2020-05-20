@@ -18,10 +18,15 @@ const Chapters = () => {
                 url
               }
             }
+            chapterScreenBackground {
+              file {
+                url
+              }
+            }
           }
         }
       }
-      allContentfulChapterOverviews(sort: {fields: id}) {
+      allContentfulChapterOverviews(sort: {fields: chapterId}) {
         edges {
           node {
             title
@@ -53,7 +58,7 @@ const Chapters = () => {
       <Container fluid className="title">
         <h1>Campaign Chapters</h1>
       </Container>
-      <Container fluid className="body">
+      <Container fluid className="body" style={{backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.chapterScreenBackground.file.url})`}}>
         {data.allContentfulChapterOverviews.edges.map(
           (item, i) => {
             return (

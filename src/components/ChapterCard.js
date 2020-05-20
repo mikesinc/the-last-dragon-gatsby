@@ -11,12 +11,12 @@ const ChapterCard = ({ chapter, title, selected, handleClick, background, brief,
   
   return (
     <div className="overall">
-      <h1>{title}</h1>
+      <h1>Chapter {chapter}</h1>
       {chapter === selected ? (
         <Card id="card_back" onClick={handleClick}>
           <div className="chapInfo" >
-            <h1>Chapter {chapter}</h1>
-            <div style={{color: 'white'}} dangerouslySetInnerHTML={{ __html: brief.html }} />
+            <h1>{title}</h1>
+            <div style={{color: 'white', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif'"}} dangerouslySetInnerHTML={{ __html: brief.html }} />
             <ButtonToolbar>
                 <Container fluid>
                     <Button

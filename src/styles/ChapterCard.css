@@ -12,8 +12,7 @@
     font-family: Ringbearer;
     font-size: 26px;
     text-align: center;
-    padding-top: 10px;
-    color: white;
+    color: ghostwhite;
 }
 
 /*front*/
@@ -40,8 +39,7 @@
 #card_back h1 {
     font-family: Ringbearer;
     color: ghostwhite;
-    font-size: 14pt;
-    -webkit-user-select: none;
+    font-size: 20px;
 }
 
 .chapInfo {

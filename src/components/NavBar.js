@@ -11,6 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 const NavBar = () => {
   const [isTop, setIsTop] = useState(true)
   const [authInfo] = useContext(AuthContext)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const data = useStaticQuery(graphql`
     {
@@ -38,15 +39,22 @@ const NavBar = () => {
       fixed="top"
       bg={isTop ? "" : "darker"}
       variant="dark"
-      collapseonselect="true"
+      collapseOnSelect="true"
       expand="lg"
+      expanded={isExpanded}
     >
-      <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+      <Navbar.Toggle
+        aria-controls="responsive-navbar-nav"
+        onClick={() => setIsExpanded(!isExpanded)}
+      />
       <Navbar.Collapse className="toggled" id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav.Link
             style={{ paddingRight: "40px" }}
-            onClick={() => navigate("/")}
+            onClick={() => {
+              setIsExpanded(false)
+              navigate("/")
+            }}
           >
             {data.allContentfulOverall.edges[0].node.websiteTitle}
           </Nav.Link>
@@ -55,26 +63,51 @@ const NavBar = () => {
             title="Story"
             id="basic-nav-dropdown"
           >
-            <NavDropdown.Item onClick={() => navigate("/story")}>
+            <NavDropdown.Item
+              onClick={() => {
+                setIsExpanded(false)
+                navigate("/story")
+              }}
+            >
               Background
             </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => navigate("/prologue")}>
+            <NavDropdown.Item
+              onClick={() => {
+                setIsExpanded(false)
+                navigate("/prologue")
+              }}
+            >
               Prologue
             </NavDropdown.Item>
             <NavDropdown.Divider />
-            <NavDropdown.Item onClick={() => navigate("/user/chapters")}>
+            <NavDropdown.Item
+              onClick={() => {
+                setIsExpanded(false)
+                navigate("/user/chapters")
+              }}
+            >
               Chapters
             </NavDropdown.Item>
-            <NavDropdown.Item onClick={() => navigate("/user/forum")}>
+            <NavDropdown.Item
+              onClick={() => {
+                setIsExpanded(false)
+                navigate("/user/forum")
+              }}
+            >
               Town Hall
             </NavDropdown.Item>
           </NavDropdown>
-          <Nav.Link onClick={() => navigate("/user/characters")}>
+          <Nav.Link
+            onClick={() => {
+              setIsExpanded(false)
+              navigate("/user/characters")
+            }}
+          >
             Characters
           </Nav.Link>
         </Nav>
         {authInfo.isAuthorised ? (
-          <Nav>
+          <Nav onClick={() => setIsExpanded(false)}>
             {authInfo.user === "Conquer" || authInfo.user === "Req" ? (
               <h1
                 className="welcomeUser"
@@ -130,8 +163,22 @@ const NavBar = () => {
           </Nav>
         ) : (
           <Nav>
-            <Nav.Link onClick={() => navigate("/login")}>Login</Nav.Link>
-            <Nav.Link onClick={() => navigate("/register")}>Register</Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                setIsExpanded(false)
+                navigate("/login")
+              }}
+            >
+              Login
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                setIsExpanded(false)
+                navigate("/register")
+              }}
+            >
+              Register
+            </Nav.Link>
           </Nav>
         )}
       </Navbar.Collapse>

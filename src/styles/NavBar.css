@@ -22,8 +22,9 @@
         font-size: 12pt;
     }
     .welcomeUser {
-        visibility: hidden;
-        height: 0;
+        /* visibility: hidden; */
+        font-size: 12pt !important;
+        padding: 5px !important;
     }
     .bg-darker {
         background-color: rgba(22,22,22,0);

@@ -14,6 +14,11 @@ const Prologue = () => {
             prologue {
               json
             }
+            prologueBackground {
+              file {
+                url
+              }
+            }
           }
         }
       }
@@ -40,12 +45,14 @@ const Prologue = () => {
   }
 
   return (
-    <Container fluid className="prologuePage">
+    <Container fluid className="storyPage" style={{backgroundImage: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.prologueBackground.file.url})`}}>
       <h1>Prologue</h1>
-      <Container className="pageText">
-      {documentToReactComponents(data.allContentfulOverall.edges[0].node.prologue.json, options)}
+      <Container fluid className="pageText">
+        {documentToReactComponents(
+          data.allContentfulOverall.edges[0].node.prologue.json,
+          options
+        )}
       </Container>
-      
     </Container>
   )
 }

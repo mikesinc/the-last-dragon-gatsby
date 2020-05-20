@@ -12,14 +12,17 @@ import Loading from "./loading"
 const particleOptions = {
   particles: {
     number: {
-      value: 200,
+      value: 100,
       density: {
         enable: true,
         value_area: 800,
       },
     },
+    color: {
+      value: ["#FF0000", "#000000"],
+    },
     size: {
-      value: 1.5,
+      value: 3,
       random: true,
     },
     opacity: {
@@ -31,11 +34,11 @@ const particleOptions = {
     },
     move: {
       enable: true,
-      direction: "bottom",
+      direction: "top",
       random: false,
       straight: false,
       out_mode: "out",
-      speed: 5,
+      speed: 1.5,
     },
   },
 }
@@ -152,7 +155,7 @@ const Login = ({ location }) => {
         fluid
         className="accessPage"
         style={{
-          background: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.background.file.url})`,
+          background: `linear-gradient(rgba(0,0,0,0.8), rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.background.file.url})`,
         }}
       >
         <Particles className="particles" params={particleOptions} />

@@ -13,12 +13,12 @@ const Layout = ({ children }) => {
     const authorise = async () => {
       const valid = await checkAuth.authorise()
       if (valid !== null) {
-        setIsChecking(false)
         if (valid) {
           setIsAuthorised({ type: "LOGIN", payload: [true, checkAuth.userID] })
         } else {
           setIsAuthorised({ type: "LOGIN", payload: [false, void 0] })
         }
+        setIsChecking(false)
       }
     }
     authorise()

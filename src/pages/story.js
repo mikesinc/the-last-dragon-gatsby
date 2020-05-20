@@ -14,6 +14,11 @@ const Story = () => {
             backstory {
               json
             }
+            backstoryBackground {
+              file {
+                url
+              }
+            }
           }
         }
       }
@@ -40,10 +45,13 @@ const Story = () => {
   }
 
   return (
-    <Container fluid className="storyPage">
+    <Container fluid className="storyPage" style={{backgroundImage: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.backstoryBackground.file.url})`}}>
       <h1>The world of Australis..</h1>
       <Container fluid className="pageText">
-      {documentToReactComponents(data.allContentfulOverall.edges[0].node.backstory.json, options)}
+        {documentToReactComponents(
+          data.allContentfulOverall.edges[0].node.backstory.json,
+          options
+        )}
       </Container>
     </Container>
   )

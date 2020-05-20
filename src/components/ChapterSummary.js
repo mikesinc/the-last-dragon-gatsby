@@ -137,7 +137,7 @@ const ChapterSummary = () => {
           Ch. {chapter} | Pt. {part}
         </h1>
       </Container>
-      <Container className="PartBody">
+      <Container fluid className="PartBody">
         {/* <div dangerouslySetInnerHTML={{ __html: partText.html }} /> */}
         {(documentToReactComponents(partText, options))}
         {isBottom ? (
