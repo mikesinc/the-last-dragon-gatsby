@@ -3,10 +3,8 @@
     font-family: "Ringbearer";
     src: url('../assets/fonts/ringbearer.ttf');
     }
-@font-face {
-    font-family: "meta";
-    src: url('../assets/fonts/Metamorphous-Regular.ttf');
-    } 
+
+
 .sheetBackground {
     background-position: center;
     background-size: cover;
@@ -45,7 +43,7 @@
 }
 .leftTables {
     text-align: center;
-    font-family: meta;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
     padding-top: 150px !important;
     left: 0px;
@@ -56,7 +54,7 @@
 }
 .rightTables {
     text-align: center;
-    font-family: meta;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     position: relative;
     padding-top: 150px !important;
     right: 0px;

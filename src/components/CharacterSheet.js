@@ -15,6 +15,7 @@ const CharacterSheet = () => {
               alignment
               attacking {
                 name
+                attack
                 type
               }
               attributes {
@@ -42,12 +43,14 @@ const CharacterSheet = () => {
               personality
               race
               stats {
+                armourClass
                 initiative
                 speed
               }
               toolkit {
                 att
                 tool
+                pro
               }
               charid
             }
