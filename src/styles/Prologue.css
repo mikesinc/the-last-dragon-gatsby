@@ -23,7 +23,7 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: ghostwhite;
   font-size: 18px;
-  text-align: justify;
+  text-align: left;
 }
 @media screen and (max-width: 900px) {
   .pageText {
