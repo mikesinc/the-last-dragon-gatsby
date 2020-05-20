@@ -40,7 +40,7 @@ const Confirmed = () => {
     <Container fluid className="confirmedBack" style={{background: `linear-gradient(rgba(255, 255, 255, 0), rgba(0,0,0,1)), url(${data.allContentfulOverall.edges[0].node.background.file.url})`}}>
       <h1>Your email is now verified, enjoy!</h1>
       <div className="goHomeButton">
-        <Link to="/login" style={{ textDecoration: "none" }}>
+        <Link to="/" style={{ textDecoration: "none" }}>
           <input
             style={{
               fontFamily: "Ringbearer",
