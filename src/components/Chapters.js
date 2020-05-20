@@ -64,7 +64,9 @@ const Chapters = () => {
             return (
               <ChapterCard
                 key={i}
-                handleClick={() => showInfo(item.node.chapterNumber)}
+                handleMouseOver={() => showInfo(item.node.chapterNumber)}
+                handleMouseLeave={() => showInfo("")}
+                handleFocus={() => showInfo(item.node.chapterNumber)}
                 chapter={item.node.chapterNumber}
                 background={item.node.chapterImage.fluid.src}
                 selected={chapter}

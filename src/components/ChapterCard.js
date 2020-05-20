@@ -6,14 +6,14 @@ import DocumentsModal from './DocumentsModal';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
 import Container from "react-bootstrap/Container"
 
-const ChapterCard = ({ chapter, title, selected, handleClick, background, brief, chapterId }) => {
+const ChapterCard = ({ chapter, title, selected, handleMouseOver, handleMouseLeave, handleFocus, background, brief, chapterId }) => {
   const [modalShow, setModalShow] = useState(false);
   
   return (
     <div className="overall">
       <h1>Chapter {chapter}</h1>
       {chapter === selected ? (
-        <Card id="card_back" onClick={handleClick}>
+        <Card id="card_back" onMouseOver={handleMouseOver} onMouseLeave={handleMouseLeave} onFocus={handleFocus}>
           <div className="chapInfo" >
             <h1>{title}</h1>
             <div style={{color: 'white', fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif'"}} dangerouslySetInnerHTML={{ __html: brief.html }} />
@@ -36,7 +36,7 @@ const ChapterCard = ({ chapter, title, selected, handleClick, background, brief,
           </div>
         </Card>
       ) : (
-        <Card onClick={handleClick}>
+        <Card onMouseOver={handleMouseOver} onMouseEnter={handleMouseLeave} onFocus={handleFocus}>
           <img
             id="card_front"
             src={background}
